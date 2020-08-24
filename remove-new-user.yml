@@ -1,0 +1,25 @@
+---
+
+- name: bootstrapping and new user
+  hosts: raiders
+  gather_facts: False
+
+
+  tasks:
+
+          - name: Remove user 'exampleuser' with group of 'sandbox'
+            user: 
+              name: exampleuser
+              comment: "Example User"
+              state: absent 
+              shell: /bin/bash
+              system: no
+              createhome: yes
+              group: sandbox
+            become: yes
+
+          - name: Remove the new group sandbox
+            group:
+                    name: sandbox
+                    state: absent
+            become: yes

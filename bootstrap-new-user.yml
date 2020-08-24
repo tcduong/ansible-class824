@@ -1,0 +1,29 @@
+---
+
+- name: bootstrapping and new user
+  hosts: raiders
+  gather_facts: False
+
+
+  tasks:
+          - name: "Bootstrap python install"
+            raw: "apt install -y python3-pip"
+            become: yes
+
+          - name: Create the new group sandbox
+            group:
+                    name: sandbox
+                    state: present
+            become: yes
+
+          - name: Add user 'exampleuser' with group of 'sandbox'
+            user: 
+              name: exampleuser
+              comment: "Example User"
+              state: present 
+              shell: /bin/bash
+              system: no
+              createhome: yes
+              group: sandbox
+            become: yes
+

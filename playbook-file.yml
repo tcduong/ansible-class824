@@ -1,0 +1,16 @@
+---
+- name: A playbook showing the file module
+  hosts: planetexpress
+
+  tasks:
+  - name: "Create directory where Space Station documents will reside"
+    become_user: root
+    become: true
+    file:
+      path: "/home/{{ item }}/station_docs/"
+      state: directory
+      owner: "{{ item }}"
+      group: "{{ item }}"
+      mode: "0755"
+    loop: [fry, bender, zoidberg]
+
