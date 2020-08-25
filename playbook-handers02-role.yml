@@ -1,0 +1,8 @@
+---
+- name: Apache server installed
+  hosts: web
+  gather_facts: no
+  become: yes
+  roles:
+     - install_apache
+     - install_mariadb

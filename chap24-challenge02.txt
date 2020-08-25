@@ -1,0 +1,1 @@
+ansible-playbook template-playbook02.yml -e "planet='omicron persei 8'"

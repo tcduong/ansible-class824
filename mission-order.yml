@@ -1,0 +1,7 @@
+---
+
+- name: Configure mission orders
+  template:
+    src: templates/mission-orders.txt.j2    # name of the template on ansible controller
+    dest: "~/{{ mission }}-mission-orders.txt"             # name of the completed file to be placed on the target system
+    mode: 0644

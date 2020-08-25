@@ -1,0 +1,14 @@
+---
+# handlers file for install_mariadb
+- name: restart_mysql
+  service:
+    name: mysql
+    state: restarted
+  listen: restart_webservices
+
+# handlers file for install_apache
+#- name: restart_apache
+#  service:
+#    name: apache2
+#    state: restarted
+#  listen: restart_webservices

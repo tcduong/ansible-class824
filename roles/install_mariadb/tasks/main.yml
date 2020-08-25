@@ -1,0 +1,37 @@
+---
+# tasks file for install_mariadb
+
+- name: import apache
+  import_role: 
+    name: install_apache
+
+- name: latest MariaDB version installed
+  package:
+    name:
+      - mariadb-server ## <-- updated
+      - mariadb-client ## <-- updated
+    state: latest
+  notify:
+      - restart_webservices ## <-- updated
+
+# ensure the mysql service is up and running
+- name: mysql (mariadb) is running
+  service:
+    name: mysql
+    enabled: yes
+    state: started
+
+# if this line needs added to my.cnf
+# then ONLY the mysql service needs restarted
+- name: Modify SQL conf file to listen on all interfaces
+  lineinfile:
+    dest: /etc/mysql/my.cnf
+    regexp: "^bind-address"
+    line: "bind-address=0.0.0.0"
+  notify:
+    - restart_mysql
+
+- name: Test apache handlers from Apache Role
+  command: /bin/true
+  notify:
+     - restart_apache
