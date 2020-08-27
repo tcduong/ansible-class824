@@ -1,0 +1,25 @@
+
+PLAY [Our first play] **********************************************************
+
+TASK [Gathering Facts] *********************************************************
+[1;31mfatal: [bender]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '10.10.2.3' (ECDSA) to the list of known hosts.\r\nbender@10.10.2.3: Permission denied (publickey,password).", "unreachable": true}[0m
+[1;31mfatal: [zoidberg]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '10.10.2.5' (ECDSA) to the list of known hosts.\r\nzoidberg@10.10.2.5: Permission denied (publickey,password).", "unreachable": true}[0m
+[1;31mfatal: [farnsworth]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added '10.10.2.6' (RSA) to the list of known hosts.\r\nfarnsworth@10.10.2.6: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).", "unreachable": true}[0m
+[0;32mok: [fry][0m
+
+TASK [Install steam locomotive on ALL machines] ********************************
+[0;33mchanged: [fry][0m
+
+PLAY RECAP *********************************************************************
+[0;31mbender[0m                     : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+[0;31mfarnsworth[0m                 : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+[0;33mfry[0m                        : [0;32mok=2   [0m [0;33mchanged=1   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+[0;31mzoidberg[0m                   : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+
+
+PLAY RECAP *********************************************************************
+[0;31mbender[0m                     : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+[0;31mfarnsworth[0m                 : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+[0;33mfry[0m                        : [0;32mok=2   [0m [0;33mchanged=1   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+[0;31mzoidberg[0m                   : ok=0    changed=0    [1;31munreachable=1   [0m failed=0    skipped=0    rescued=0    ignored=0   
+
