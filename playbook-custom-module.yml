@@ -1,0 +1,17 @@
+---
+
+- name: Testing my new module
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+
+  - name: Testing my custom module to interact with NASA imagery and Google Earth
+    nasaimagery:
+      lon: 13.6176833
+      lat: 17.6778402
+      apikey: Kb2bqoPJgYECf3shJKd0uS5cJCHryI1hPNC5ApTE
+      sdate: '2017-04-01'
+      dest: /home/student/static/tom-example.png   # location to download image
+
+      #33.6176833,-117.6778402,

@@ -1,0 +1,14 @@
+---
+
+- name: Provide mongoDB access to new customer
+  hosts: fry
+  become: yes
+
+  tasks:
+    - name: Get Collection
+      shell: /usr/bin/mongo --username bob --password 12345  --authenticationDatabase "admin" bugers --eval 'db.inventory.find().pretty()' 
+      register: inventory
+
+
+    - debug: 
+        var: inventory.stdout_lines

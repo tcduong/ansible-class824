@@ -1,0 +1,55 @@
+---
+- name: Deploy a MongoDB instance for testing
+  hosts: fry
+  become: yes
+
+  tasks:
+
+        - name: install mongoDB
+          apt:
+                  name:
+                          - mongodb
+                          - python3-pip
+                  state: present
+                  update_cache: yes
+
+        - name: install pymongo (python req to operate mongodb)
+          pip:
+                  name:
+                          - pymongo
+
+        - name: copy config file
+          template:
+                  src: mongodb.conf.j2
+                  dest: /etc/mongodb.conf
+                  owner: root
+                  group: root
+                  mode: 0644
+          notify:
+            - restart mongodb
+
+        - name: create /etc/security/limits.d/mongodb.conf
+          copy:
+                  src: security-mongodb.conf
+                  dest: /etc/security/limits.d/mongodb.conf
+                  owner: root
+                  group: root
+                  mode: 0644
+          notify:
+            - restart mongodb
+
+        - name: Check if some user is not there already - try to get user list as anonymous
+          shell: /usr/bin/mongo --eval 'db.getUsers()' admin
+          ignore_errors: true
+          register: getusers
+          changed_when: false
+
+        - debug:
+                var: getusers
+
+
+
+  handlers:
+        - name: restart mongodb
+          command: "/etc/init.d/mongodb restart"
+

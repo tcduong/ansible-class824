@@ -1,0 +1,53 @@
+---
+
+# Mongo Commands to run
+#mongo --username bob --password 12345  --authenticationDatabase "admin"
+#db.runCommand({connectionStatus : 1})
+#show collections;
+#db.inventory.find().pretty();
+#
+#
+
+
+
+- name: Provide mongoDB access to new customer
+  hosts: fry
+  become: yes
+  
+  tasks:
+
+          # Create 'burgers' database user with name 'bob' and password '12345'.
+          #- mongodb_user:
+          #      login_user: RootAdmin   # user that will create burgers DB
+          #      login_password: abc123  # password for login_user
+          #      login_database: admin
+          #      login_host: localhost
+          #      database: burgers       # DB to be created
+          #      name: bob               # user within the DB 'burgers'
+          #      password: 12345         # password for user bob
+          #      state: present
+          #      roles: 
+          #         - { db: "burgers", role: "readWrite" }
+
+          - name: copy script
+            copy:
+                    src: createbob.js
+                    dest: /tmp/createbob.js
+                    mode: 0777
+
+          - name: create bob
+            shell: /usr/bin/mongo --authenticationDatabase admin admin /tmp/createbob.js
+            ignore_errors: true
+
+          - name: Get Users list
+            shell: /usr/bin/mongo --eval 'db.getUsers()' admin
+            ignore_errors: true
+            register: getusers
+
+          - debug:
+                var: getusers
+
+          - name: cleanup script
+            file:
+                    path: /tmp/createbob.js
+                    state: absent
