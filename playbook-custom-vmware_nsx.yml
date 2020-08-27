@@ -1,0 +1,28 @@
+---
+- name: VMware NSX Playbook
+  connection: local
+  hosts: localhost
+  ## if yes, facts will be gathered
+  ## about the controller. Useful for  
+  ## vars like ansible_date_time
+  gather_facts: yes
+
+  vars_files:
+    - ~/answerfile.yml
+
+  tasks:
+
+  - name: Create update or delete logical switches
+    nsx_logical_switch:
+      nsxmanager_spec: "{{ nsxmanager_spec }}"
+      state: present
+      transportzone: "TZ"
+      name: "TestLS"
+      controlplanemode: "UNICAST_MODE"
+      description: "My Great Logical Switch"
+    register: resultz
+
+  - name: display JSON returned by last module
+    debug:
+      var: resultz
+

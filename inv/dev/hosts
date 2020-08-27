@@ -10,3 +10,7 @@ fry         ansible_host=10.10.2.4 ansible_user=fry ansible_python_interpreter=/
 
 [planetexpress:vars]
 ansible_python_interpreter=/usr/bin/python3
+
+
+[professors]
+farnsworth  ansible_host=10.10.2.6 fileuser=farnsworth ansible_user=farnsworth

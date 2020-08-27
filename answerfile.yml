@@ -1,0 +1,6 @@
+nsxmanager_spec:
+  raml_file: '/raml/nsxraml/nsxvapiv614.raml'
+  host: nsxmanager.invalid.org
+  user: admin
+  password: qwerty
+
